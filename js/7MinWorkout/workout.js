@@ -1,13 +1,14 @@
-angular.module('7minWorkout').
+angular.module('7minWorkout')
 // dependency injections here - $scope, $interval
-controller('WorkoutController', ['$scope', '$interval', function($scope, $interval){
+.controller('WorkoutController', ['$scope', '$interval', function($scope, $interval){
 
+'use strict';
     var restExercise;
     var workoutPlan;
 
     // exercise model
     function Exercise(args) {
-        this.name = ars.name;                   // should be unique
+        this.name = args.name;                   // should be unique
         this.title = args.title;                // shown to the user
         this.description = args.description;
         this.image = args.image;
