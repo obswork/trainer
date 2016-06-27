@@ -1,9 +1,11 @@
 angular.module('7minWorkout').
-controller('WorkoutController', ['$scope', function($scope){
+// dependency injections here - $scope, $interval
+controller('WorkoutController', ['$scope', '$interval', function($scope, $interval){
 
     var restExercise;
     var workoutPlan;
 
+    // exercise model
     function Exercise(args) {
         this.name = ars.name;                   // should be unique
         this.title = args.title;                // shown to the user
@@ -15,6 +17,7 @@ controller('WorkoutController', ['$scope', function($scope){
         this.procedure = args.procedure;
     }
 
+    // workoutplan model
     function WorkoutPlan(args) {
         this.exercises = [];                    // contains objects in the format: {exercise: new Exercise({}), duration:30}
         this.name = args.name;
@@ -34,6 +37,177 @@ controller('WorkoutController', ['$scope', function($scope){
             duration: workoutPlan.restBetweenExercise
         };
         startExercise(workoutPlan.exercises.shift());
+    };
+
+
+    // creates initial workout - 12 exercises from jumping jacks to side planks
+    var createWorkout = function() {
+        var workout = new WorkoutPlan({
+            name: "7minWorkout",
+            title: "7 Minute Workout",
+            restBetweenExercise: 10
+        });
+
+        workout.exercises.push({
+            details: new Exercise({
+                name: "jumpingJacks",
+                title: "Jumping Jacks",
+                description: "Jumping Jacks.",
+                image: "img/JumpingJacks.png",
+                videos: [],
+                variations: [],
+                procedure: ""
+            }),
+            duration: 30
+        });
+      workout.exercises.push({
+          exercise: new Exercise({
+              name: "wallSit",
+              title: "Wall Sit",
+              description: "Wall Sit.",
+              image: "img/wallsit.png",
+              videos: [],
+              variations: [],
+
+          }),
+          duration: 30
+      });
+      workout.exercises.push({
+          exercise: new Exercise({
+              name: "pushUp",
+              title: "Push Up",
+              description: "Discription about pushup.",
+              image: "img/pushup.png",
+              videos: ["https://www.youtube.com/watch?v=Eh00_rniF8E", "https://www.youtube.com/watch?v=ZWdBqFLNljc", "https://www.youtube.com/watch?v=UwRLWMcOdwI", "https://www.youtube.com/watch?v=ynPwl6qyUNM", "https://www.youtube.com/watch?v=OicNTT2xzMI"],
+              variations: ["Planche push-ups", "Knuckle push-ups", "Maltese push-ups", "One arm versions"],
+              procedure: ""
+          }),
+          duration: 30
+      });
+      workout.exercises.push({
+          exercise: new Exercise({
+              name: "crunches",
+              title: "Abdominal Crunches",
+              description: "Abdominal Crunches.",
+              image: "img/crunches.png",
+              videos: [],
+              variations: [],
+              procedure: ""
+          }),
+          duration: 30
+      });
+      workout.exercises.push({
+          exercise: new Exercise({
+              name: "stepUpOntoChair",
+              title: "Step Up Onto Chair",
+              description: "Step Up Onto Chair.",
+              image: "img/stepUpOntoChair.jpeg",
+              videos: [],
+              variations: [],
+              procedure: ""
+          }),
+          duration: 30
+      });
+      workout.exercises.push({
+          exercise: new Exercise({
+              name: "squat",
+              title: "Squat",
+              description: "Squat.",
+              image: "img/squat.png",
+              videos: [],
+              variations: [],
+              procedure: ""
+          }),
+          duration: 30
+      });
+      workout.exercises.push({
+          exercise: new Exercise({
+              name: "tricepdips",
+              title: "Tricep Dips On Chair",
+              description: "Tricep Dips On Chair.",
+              image: "img/tricepdips.jpg",
+              videos: [],
+              variations: [],
+              procedure: ""
+          }),
+          duration: 30
+      });
+      workout.exercises.push({
+          exercise: new Exercise({
+              name: "plank",
+              title: "Plank",
+              description: "Plank.",
+              image: "img/plank.png",
+              videos: [],
+              variations: [],
+              procedure: ""
+          }),
+          duration: 30
+      });
+      workout.exercises.push({
+          exercise: new Exercise({
+              name: "highKnees",
+              title: "High Knees",
+              description: "High Knees.",
+              image: "img/highknees.png",
+              videos: [],
+              variations: [],
+              procedure: ""
+          }),
+          duration: 30
+      });
+      workout.exercises.push({
+          exercise: new Exercise({
+              name: "lunges",
+              title: "Lunges",
+              description: "Lunges.",
+              image: "img/lunges.png",
+              videos: [],
+              variations: [],
+              procedure: ""
+          }),
+          duration: 30
+      });
+      workout.exercises.push({
+          exercise: new Exercise({
+              name: "pushupNRotate",
+              title: "Pushup And Rotate",
+              description: "Pushup And Rotate.",
+              image: "img/pushupNRotate.jpg",
+              videos: [],
+              variations: [],
+              procedure: ""
+          }),
+          duration: 30
+      });
+      workout.exercises.push({
+          exercise: new Exercise({
+              name: "sidePlank",
+              title: "Side Plank",
+              description: "Side Plank.",
+              image: "img/sideplank.png",
+              videos: [],
+              variations: [],
+              procedure: ""
+          }),
+          duration: 30
+      });
+      return workout;
+    };
+
+    var startExercise = function (exercisePlan) {
+        $scope.currentExercise = exercisePlan;
+        $scope.currentExerciseDuration = 0;
+        // $interval service is a wrapper around window.setInterval - used to call currentExerciseDuration every 1000 ms (1 sec)
+        // see docs for details: https://docs.angularjs.org/api/ng/service/$interval
+        // fn to invoke
+        $interval(function () {
+            $scope.currentExerciseDuration = $scope.currentExerciseDuration + 1;
+        }, 
+        // delay - between fx calls (ms)
+        1000,
+        // count - # of times to repeat
+        $scope.currentExercise.duration);
     };
 
     var init = function() {
