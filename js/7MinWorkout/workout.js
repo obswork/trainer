@@ -8,7 +8,7 @@ angular.module('7minWorkout')
 
     // exercise model
     function Exercise(args) {
-        this.name = args.name;                   // should be unique
+        this.name = args.name;                  // should be unique
         this.title = args.title;                // shown to the user
         this.description = args.description;
         this.image = args.image;
@@ -79,7 +79,7 @@ angular.module('7minWorkout')
               title: "Push Up",
               description: "Discription about pushup.",
               image: "img/pushup.png",
-              videos: ["https://www.youtube.com/watch?v=Eh00_rniF8E", "https://www.youtube.com/watch?v=ZWdBqFLNljc", "https://www.youtube.com/watch?v=UwRLWMcOdwI", "https://www.youtube.com/watch?v=ynPwl6qyUNM", "https://www.youtube.com/watch?v=OicNTT2xzMI"],
+             videos: ["https://www.youtube.com/watch?v=Eh00_rniF8E", "https://www.youtube.com/watch?v=ZWdBqFLNljc", "https://www.youtube.com/watch?v=UwRLWMcOdwI", "https://www.youtube.com/watch?v=ynPwl6qyUNM", "https://www.youtube.com/watch?v=OicNTT2xzMI"],
               variations: ["Planche push-ups", "Knuckle push-ups", "Maltese push-ups", "One arm versions"],
               procedure: ""
           }),
@@ -201,7 +201,7 @@ angular.module('7minWorkout')
         $scope.currentExerciseDuration = 0;
         // $interval service is a wrapper around window.setInterval - used to call currentExerciseDuration every 1000 ms (1 sec)
         // see docs for details: https://docs.angularjs.org/api/ng/service/$interval
-        // fn to invoke
+        // args = fn to invoke
         $interval(function () {
             $scope.currentExerciseDuration = $scope.currentExerciseDuration + 1;
         }, 
