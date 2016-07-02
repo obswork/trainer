@@ -52,6 +52,26 @@ angular.module('7minWorkout')
         return nextExercise;
     };
 
+    /*
+    // exercise transitions implemented using angular $scope object $watch fn 
+    // see: https://code.angularjs.org/1.4.12/docs/api/ng/type/$rootScope.Scope
+    // $watch syntax: 
+    // $scope.$watch(watchExpression, [listener], [objectEquality]);
+    // watchExpression = string | fn to watch for changes
+    // listener = invoked when watchExpression changes
+    // objectEquality = boolean determines how changes are detected - ~ simple vs deep
+        
+    $scope.$watch('currentExerciseDuration', function(nVal) {
+        if (nVal == $scope.currentExercise.duration) {
+            var next = getNextExercise($scope.currentExercise);
+            if (next) {
+                startExercise(next); 
+            } else {
+                console.log('Workout complete!');
+            }
+        }
+    });
+    */
 
     // creates initial workout - 12 exercises from jumping jacks to side planks
     var createWorkout = function() {
@@ -71,7 +91,7 @@ angular.module('7minWorkout')
                 variations: [],
                 procedure: ""
             }),
-            duration: 30
+            duration: 15
         });
       workout.exercises.push({
           exercise: new Exercise({
@@ -83,7 +103,7 @@ angular.module('7minWorkout')
               variations: [],
 
           }),
-          duration: 30
+          duration: 15
       });
       workout.exercises.push({
           exercise: new Exercise({
@@ -95,7 +115,7 @@ angular.module('7minWorkout')
               variations: ["Planche push-ups", "Knuckle push-ups", "Maltese push-ups", "One arm versions"],
               procedure: ""
           }),
-          duration: 30
+          duration: 15
       });
       workout.exercises.push({
           exercise: new Exercise({
@@ -107,7 +127,7 @@ angular.module('7minWorkout')
               variations: [],
               procedure: ""
           }),
-          duration: 30
+          duration: 15
       });
       workout.exercises.push({
           exercise: new Exercise({
@@ -119,7 +139,7 @@ angular.module('7minWorkout')
               variations: [],
               procedure: ""
           }),
-          duration: 30
+          duration: 15
       });
       workout.exercises.push({
           exercise: new Exercise({
@@ -131,7 +151,7 @@ angular.module('7minWorkout')
               variations: [],
               procedure: ""
           }),
-          duration: 30
+          duration: 15
       });
       workout.exercises.push({
           exercise: new Exercise({
@@ -143,7 +163,7 @@ angular.module('7minWorkout')
               variations: [],
               procedure: ""
           }),
-          duration: 30
+          duration: 15
       });
       workout.exercises.push({
           exercise: new Exercise({
@@ -155,7 +175,7 @@ angular.module('7minWorkout')
               variations: [],
               procedure: ""
           }),
-          duration: 30
+          duration: 15
       });
       workout.exercises.push({
           exercise: new Exercise({
@@ -167,7 +187,7 @@ angular.module('7minWorkout')
               variations: [],
               procedure: ""
           }),
-          duration: 30
+          duration: 15
       });
       workout.exercises.push({
           exercise: new Exercise({
@@ -179,7 +199,7 @@ angular.module('7minWorkout')
               variations: [],
               procedure: ""
           }),
-          duration: 30
+          duration: 15
       });
       workout.exercises.push({
           exercise: new Exercise({
@@ -191,7 +211,7 @@ angular.module('7minWorkout')
               variations: [],
               procedure: ""
           }),
-          duration: 30
+          duration: 15
       });
       workout.exercises.push({
           exercise: new Exercise({
@@ -203,7 +223,7 @@ angular.module('7minWorkout')
               variations: [],
               procedure: ""
           }),
-          duration: 30
+          duration: 15
       });
       return workout;
     };
@@ -220,7 +240,16 @@ angular.module('7minWorkout')
         // delay - between fx calls (ms)
         1000,
         // count - # of times to repeat
-        $scope.currentExercise.duration);
+        $scope.currentExercise.duration)
+        // using promise vs angular $watch
+        .then(function () {
+            var next = getNextExercise(exercisePlan);
+            if ( next ) {
+                startExercise(next);
+            } else {
+                console.log("workout complete!");
+            }
+        });
     };
 
     var init = function() {
