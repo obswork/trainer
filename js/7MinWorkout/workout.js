@@ -40,6 +40,18 @@ angular.module('7minWorkout')
         startExercise(workoutPlan.exercises.shift());
     };
 
+    var getNextExercise = function(currentExercisePlan) {
+        var nextExercise = null;
+        if (currentExercisePlan === restExercise) {
+            nextExercise = workoutPlan.exercises.shift();
+        } else {
+            if (workoutPlan.exercises.length !== 0) {
+                nextExercise = restExercise;
+            }
+        }
+        return nextExercise;
+    };
+
 
     // creates initial workout - 12 exercises from jumping jacks to side planks
     var createWorkout = function() {
