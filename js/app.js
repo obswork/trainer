@@ -1,5 +1,6 @@
+// see: https://docs.angularjs.org/api/ngRoute/service/$route
 angular.module('app', ['ngRoute', '7minWorkout']).
-config(function ($routeProvider) {
+config(function ($routeProvider, $sceDelegateProvider) {
     $routeProvider.when('/start', {
         templateUrl: 'partials/start.html'
     });
@@ -13,5 +14,10 @@ config(function ($routeProvider) {
     $routeProvider.otherwise({
         redirectTo: '/start'
     });
+
+    $sceDelegateProvider.resourceUrlWhitelist([
+    // allow same origin resource loads
+    'self', 
+    new RegExp('^(http[s]?):\/\/(w{3}.)?youtube\.com/.+$')]);
 });
 angular.module('7minWorkout', []);
