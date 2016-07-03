@@ -60,11 +60,9 @@ angular.module('7minWorkout')
         // using promise vs angular $watch
         .then(function () {
             var next = getNextExercise(exercisePlan);
-            console.log(next);
             if ( next ) {
                 startExercise(next);
             } else {
-                console.log("workout complete!");
             }
         });
     };
