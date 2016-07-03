@@ -1,5 +1,4 @@
-angular.module('app', ['ngRoute', '7minWorkout']);
-angular.module('7minWorkout', []);
+angular.module('app', ['ngRoute', '7minWorkout']).
 config(function ($routeProvider) {
     $routeProvider.when('/start', {
         templateUrl: 'partials/start.html'
@@ -15,3 +14,4 @@ config(function ($routeProvider) {
         redirectTo: '/start'
     });
 });
+angular.module('7minWorkout', []);
