@@ -1,6 +1,6 @@
 angular.module('7minWorkout')
 // dependency injections here - $scope, $interval
-.controller('WorkoutController', ['$scope', '$interval', function($scope, $interval){
+.controller('WorkoutController', ['$scope', '$interval', '$location', function($scope, $interval, $location){
 
 'use strict';
 
@@ -63,6 +63,7 @@ angular.module('7minWorkout')
             if ( next ) {
                 startExercise(next);
             } else {
+                $location.path('/finish');
             }
         });
     };
@@ -114,9 +115,10 @@ angular.module('7minWorkout')
                 title: "Jumping Jacks",
                 description: "Jumping Jacks.",
                 image: "img/JumpingJacks.jpg",
-                videos: [],
+                // 
+                videos: ['https://www.youtube.com/embed/UpH7rm0cYbM'],
                 variations: [],
-                procedure: ""
+                procedure: "Jump, splay legs and feet. Jump, return legs and feet to starting position. Repeat."
             }),
             duration: 10
         });
