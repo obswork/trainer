@@ -129,7 +129,7 @@ angular.module('7minWorkout')
                 // 
                 videos: ['https://www.youtube.com/embed/UpH7rm0cYbM'],
                 variations: [],
-                procedure: "Jump, splay legs and feet. Jump, return legs and feet to starting position. Repeat."
+                procedure: "Jump, splay legs and feet. </br> Jump, return legs and feet to starting position. </br> Repeat. </br>"
             }),
             duration: 10
         });
@@ -141,6 +141,7 @@ angular.module('7minWorkout')
                 image: "img/wallsit.jpg",
                 videos: [],
                 variations: [],
+                proecudre: ""
 
             }),
             duration: 10
